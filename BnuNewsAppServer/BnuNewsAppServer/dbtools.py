@@ -64,17 +64,17 @@ class DB:
     #===============================================================================
     # user operations
     #===============================================================================
-    def add_user(self, user_id, password, username, usertype):
+    def add_user(self, email, password, name, usertype):
         """
         user_id should be a valid email address
         """
         user = {
-                '_id':user_id,
+                'email':email,
                 'password':password,
-                'username': username,
+                'name': name,
                 'usertype': usertype,
                }
-        return self.get_collection('user').insert(user)
+        return self.get_collection('user').insert(user, safe=True)
 
     def login(self, user_id, password):
         user = self.get_collection('user').find_one({'_id': user_id, 

@@ -10,28 +10,30 @@ from datetime import datetime
 
 class DBTest(unittest.TestCase):
     db = dbtools.DB()
-    default_user_id = 'test@gmail.com'
+    default_email = 'test@gmail.com'
     default_password = '111111'
-    default_username = 'test'
+    default_name = 'test'
     default_usertype = '1'
 
     def setUp(self):
         self.num_user = self.get_num_of_elem('user')
 
         # add default test user
-        self.db.add_user(self.default_user_id,
-                         self.default_password,
-                         self.default_username,
-                         self.default_usertype)
+        self.default_userid = self.db.add_user(self.default_email,
+                                               self.default_password,
+                                               self.default_name,
+                                               self.default_usertype)
 
     def tearDown(self):
         """
         ensure that there's no change for database after the test
         """
         # remove default test user
-        self.remove_by_id('user', self.default_user_id)
+        self.remove_by_id('user', self.default_userid)
         if self.num_user != self.get_num_of_elem('user'):
-            raise self.failureException("expected %d, get %d" % (self.num_user, self.get_num_of_elem('user')))
+            raise self.failureException(
+                "expected %d, get %d" % (self.num_user, 
+                                         self.get_num_of_elem('user')))
 
     def get_num_of_elem(self, collection_name):
         return self.db.get_collection(collection_name).find().count()
@@ -58,10 +60,11 @@ class DBTest(unittest.TestCase):
     # user operations
     #===============================================================================
     def test_add_user(self):
-        user = self.get_by_id('user', self.default_user_id)
-        self.assertEqual(user['_id'], self.default_user_id, 'user_id mismatch')
+        user = self.get_by_id('user', self.default_userid)
+        self.assertEqual(user['email'], self.default_email, 'email mismatch')
         self.assertEqual(user['password'], self.default_password, 'password mismatch')
-        self.assertEqual(user['username'], self.default_username, 'username mismatch')
+        self.assertEqual(user['name'], self.default_name, 'name mismatch')
+        self.assertEqual(user['usertype'], self.default_usertype, 'usertype mismatch')
 
 
 if __name__ == "__main__":

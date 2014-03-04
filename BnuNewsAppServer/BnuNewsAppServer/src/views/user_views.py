@@ -22,23 +22,32 @@ db = dbtools.DB()
 
 
 def register_action(request):
-    user_id = request.POST['email']
+    email = request.POST['username']
     password = request.POST['password']
-    username = request.POST['username']
+    name = request.POST['name']
     usertype = request.POST['usertype']
     
-    is_succ = db.add_user(user_id, password, username, usertype)
+    # username should be email
+    # TODO
+    
+    user_id = db.add_user(email, password, name, usertype)
     
     res = []
     
-    if is_succ:
+    if user_id is not None:
         res.append({'code': 0,
                     'msg': r'注册成功',
-                    'user_id': user_id, }) 
+                    'userid': str(user_id),
+                    'username': email,
+                    'name': name,
+                    'usertype': usertype, }) 
     else:
         res.append({'code': 1,
                     'msg': r'注册失败',
-                    'user_id': user_id, })
+                    'userid': str(user_id),
+                    'username': email,
+                    'name': name,
+                    'usertype': usertype, }) 
     return HttpResponse(json.dumps(res), )
     
 
