@@ -23,16 +23,17 @@ sid - 学号或教师工号
 返回数据：
 {
 "code":0,
-"msg":"注册成功",
-"userid":userid,
-"username":username,
-"name":name,
-"usertype":usertype,
+"msg":"",
+"userid":"",
+"username":"",
+"name":"",
+"usertype":"",
 }
 
 示例：
-[{"username": "luojing.derek@gmail.com", "code": 0, "name": "derek", "userid": "53158b02555eb21c80e7f646", "usertype": "1", "msg": "\u6ce8\u518c\u6210\u529f"}]
-	  
+{"username": "luojing.derek@gmail.com", "code": 0, "name": "derek", "userid": "53159347555eb23068a05321", "usertype": "1", "msg": "\u6ce8\u518c\u6210\u529f"}	  
+
+
 
 2. 登录接口
 
@@ -50,8 +51,8 @@ password
 返回数据：
 {
 "code":0,
-"msg":"登陆成功",
-"userid":userid,
+"msg":"",
+"userid":"",
 }
 
 

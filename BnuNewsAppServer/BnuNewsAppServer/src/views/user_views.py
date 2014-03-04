@@ -32,22 +32,54 @@ def register_action(request):
     
     user_id = db.add_user(email, password, name, usertype)
     
-    res = []
+    res = {}
+    res['userid'] = str(user_id)
+    res['username'] = email
+    res['usertype'] = usertype
+    res['name'] = name
     
     if user_id is not None:
-        res.append({'code': 0,
+        res['code'] = 0
+        res['msg'] = r'注册成功'
+
+    else:
+        res['code'] = 1
+        res['msg'] = r'注册失败'
+        
+        """
+        res = {'code': 0,
                     'msg': r'注册成功',
                     'userid': str(user_id),
                     'username': email,
                     'name': name,
                     'usertype': usertype, }) 
+        
     else:
         res.append({'code': 1,
                     'msg': r'注册失败',
                     'userid': str(user_id),
                     'username': email,
                     'name': name,
-                    'usertype': usertype, }) 
+                    'usertype': usertype, })
+    """
     return HttpResponse(json.dumps(res), )
+
+def login_action(request):
+    email = request.POST['username']
+    password = request.POST['password']
     
+    res = {}
+    
+    user_id = db.login(email, password)
+
+    if user_id is not None:
+        res['code'] = 0
+        res['msg'] = r'login success'
+        res['userid'] = str(user_id)
+    else:
+        res['code'] = 1
+        res['msg'] = r'login error'
+        res['userid'] = str(user_id)
+        
+    return HttpResponse(json.dumps(res), )
 

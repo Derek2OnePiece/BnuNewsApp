@@ -76,10 +76,10 @@ class DB:
                }
         return self.get_collection('user').insert(user, safe=True)
 
-    def login(self, user_id, password):
-        user = self.get_collection('user').find_one({'_id': user_id, 
+    def login(self, email, password):
+        user = self.get_collection('user').find_one({'email': email, 
                                                      'password': password})
         if user is not None:
-            return True
+            return user['_id']
         else:
-            return False
+            return None

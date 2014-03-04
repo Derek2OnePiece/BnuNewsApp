@@ -65,6 +65,10 @@ class DBTest(unittest.TestCase):
         self.assertEqual(user['password'], self.default_password, 'password mismatch')
         self.assertEqual(user['name'], self.default_name, 'name mismatch')
         self.assertEqual(user['usertype'], self.default_usertype, 'usertype mismatch')
+        
+    def test_login(self):
+        self.assertTrue(self.db.login(self.default_email, self.default_password) is not None, 'login error')
+        
 
 
 if __name__ == "__main__":
