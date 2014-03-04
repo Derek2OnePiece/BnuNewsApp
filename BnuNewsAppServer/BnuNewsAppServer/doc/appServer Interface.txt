@@ -1,0 +1,39 @@
+
+1. 注册接口
+
+appserver/user/register
+
+请求方式：POST
+
+必选参数：
+	email
+	username
+	password
+	usertype
+
+	选填参数：
+	phone
+	sid - 学号或教师工号
+
+返回数据：
+{
+"code":0,
+"msg":"注册成功",
+"user_id":"test@gmail.com",
+}
+
+
+
+	  
+
+2. 登录接口
+
+appserver/user/login
+
+请求方式：POST
+必选参数：email
+          password
+待选参数：
+返回数据：res - 0：成功；
+                其他：失败；
+          msg

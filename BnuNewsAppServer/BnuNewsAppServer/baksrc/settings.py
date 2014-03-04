@@ -1,5 +1,4 @@
 # Django settings for BnuNewsAppServer project.
-import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,13 +9,10 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-PROJECT_ROOT = os.path.dirname(__file__)
-print(PROJECT_ROOT)
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_ROOT, 'sqlite.db'),        # Or path to database file if using sqlite3.
+        'NAME': 'F:\\Workspace\\Eclipse\\BnuNewsAppServer\\sqlite.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -33,7 +29,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -87,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '56zg%dc3c*1ms@&a2^yg$n5_o3x#+v)fh9$!fjc%9e=hbsj^!^'
+SECRET_KEY = '0c+dmd$!#&kc6w#jv_^aw3!g2-8-xnd9knc32!c_(#f!e^bv*w'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -99,8 +95,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.middleware.csrf.CsrfResponseMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
