@@ -57,7 +57,7 @@ def get_comments_action(request):
             res = {'code': 1, 'msg': r'评论加载失败', }
             return HttpResponse(json.dumps(res), )
         
-        if user_info['avater_sub_url'] is not None:
+        if user_info['avater_sub_url'] != '':
             avater_url = os.path.join(settings.IMAGES_URL_PREFIX, 
                                       r'user_avatar',
                                       user_info['avater_sub_url'])

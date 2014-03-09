@@ -67,7 +67,15 @@ def login_action(request):
         res['sid'] = user['sid']
         res['gender'] = user['gender']
         res['signature'] = user['signature']
-        res['avater_sub_url'] = user['avater_sub_url']
+        # res['avater_sub_url'] = user['avater_sub_url']
+        if user['avater_sub_url'] != '':
+            avater_url = os.path.join(settings.IMAGES_URL_PREFIX, 
+                                      r'user_avatar',
+                                      user['avater_sub_url'])
+            res['avater_url'] = avater_url
+        else:
+            res['avater_url'] = ''
+        
     else:
         res['code'] = 1
         res['msg'] = r'login error'
