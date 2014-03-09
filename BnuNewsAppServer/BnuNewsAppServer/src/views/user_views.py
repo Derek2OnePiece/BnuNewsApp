@@ -63,6 +63,11 @@ def login_action(request):
         res['username'] = user['email']
         res['user_type'] = user['user_type']
         res['name'] = user['name']
+        res['phone'] = user['phone']
+        res['sid'] = user['sid']
+        res['gender'] = user['gender']
+        res['signature'] = user['signature']
+        res['avater_sub_url'] = user['avater_sub_url']
     else:
         res['code'] = 1
         res['msg'] = r'login error'
@@ -101,7 +106,7 @@ def update_user_profile_action(request):
                                    r'user_avatar',
                                    avater_sub_url)
         image.save(avater_path,"jpeg")
-    elif cur_user_info['avater_sub_url'] is not None:
+    elif cur_user_info['avater_sub_url'] != '':
         avater_sub_url = cur_user_info['avater_sub_url']
     else:
         avater_sub_url = r'0.jpeg'

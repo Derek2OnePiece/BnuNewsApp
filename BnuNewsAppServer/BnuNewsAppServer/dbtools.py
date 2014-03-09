@@ -74,7 +74,7 @@ class DB:
                 'name': name,
                 'user_type': user_type, 
                 'is_admin': is_admin, 
-                'avater_sub_url': None, 
+                'avater_sub_url': '', 
                 'phone': '',
                 'sid': '',
                 'gender': 0,
