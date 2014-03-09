@@ -49,7 +49,8 @@ class UploadTestData():
             self.db.add_user(self.default_email,
                              r'xxxxxx',
                              r'北京师范大学',
-                             r'1')
+                             r'1',
+                             r'56.jpg')
         
     #==========================================================================
     # news operations

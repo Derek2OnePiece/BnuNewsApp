@@ -60,6 +60,7 @@ class DB:
     #    name
     #    user_type
     #    is_admin               || 默认0
+    #    avater_sub_url         ||
     #
     #==========================================================================
     def add_user(self, email, password, name, usertype, is_admin = 0):
@@ -67,7 +68,8 @@ class DB:
                 'password':password,
                 'name': name,
                 'usertype': usertype, 
-                'is_admin': is_admin, }
+                'is_admin': is_admin, 
+                'avater_sub_url': None, }
         return self.get_collection('user').insert(user, safe=True)
 
     def check_user_exist_by_email(self, email):
@@ -84,6 +86,9 @@ class DB:
     
     def login_admin(self, email, password):
         pass
+    
+    def get_user_info_by_id(self, user_id):
+        return self.get_collection('user').find_one({'_id': user_id})
     
     #==========================================================================
     # news operations
@@ -102,6 +107,10 @@ class DB:
     #    inner_pic_sub_url
     #    is_delete                ||   0: 不删除； 1：删除
     #    video_target_url         ||
+    #    comments
+    #        user_id              ||
+    #        msg                  ||
+    #        submit_timestamp     ||
     #
     #==========================================================================
     def add_news(self, news_type, title, abstract, body, author,
@@ -122,7 +131,8 @@ class DB:
                     'pub_status': pub_status,
                     'is_delete': is_delete,
                     'inner_pic_sub_url': inner_pic_sub_url,
-                    'video_target_url': video_target_url, }
+                    'video_target_url': video_target_url, 
+                    'comments': [], }
         return self.get_collection('news').insert(raw_news)
     
     def update_pub_timestamp(self,):
@@ -149,7 +159,46 @@ class DB:
     
     def get_news_detail_by_id(self, news_id):
         return self.get_collection('news').find_one({'_id': news_id})
-        
+    
+    """
+    def get_comments_by_news_id(self, news_id):
+        raw_news =  self.get_collection('news').find_one({'_id': news_id})
+        if raw_news is not None:
+            return raw_news['comments']
+        else:
+            return None
+    
+    def add_comment(self, news_id, user_id, msg):
+        exist = self.get_collection('news').find_one({'_id': news_id}) != None
+        if exist:
+            return self.get_collection('news')\
+            .update({'_id': news_id},
+                    {'$push': {'comments': {'user_id': user_id, 'msg': msg}}})
+        else:
+            return False
+    """    
+    #==========================================================================
+    # comment operations
+    #
+    #    _id                      ||
+    #    user_id                  ||
+    #    news_id                  ||
+    #    pub_timestamp            ||
+    #    msg                      ||
+    #
+    #==========================================================================
+    def add_comment(self, news_id, user_id, msg):
+        comment = {'user_id': user_id,
+                   'news_id': news_id,
+                   'pub_timestamp': long(time.time()),
+                   'msg': msg, }
+        return self.get_collection('comments').insert(comment)
+    
+    def get_k_comments_by_timestamp_news_id(self, begin_timestamp, news_id, k):
+        return self.get_collection('comments')\
+            .find({'news_id': news_id,
+                   'pub_timestamp': {'$lte': begin_timestamp}})\
+            .sort('pub_timestamp', pymongo.DESCENDING).limit(k)
 
         
         
