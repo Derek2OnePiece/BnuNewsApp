@@ -96,11 +96,12 @@ class DB:
     def get_user_info_by_id(self, user_id):
         return self.get_collection('user').find_one({'_id': user_id})
     
-    def update_user_profile(self, user_id, avater_sub_url = r'0.jpeg', 
+    def update_user_profile(self, user_id, name = None, avater_sub_url = r'0.jpeg', 
                             phone = '', sid = '', gender = 0, signature = ''):
         return self.get_collection('user')\
             .update({'_id': user_id},
-                    {'$set': {'avater_sub_url': avater_sub_url,
+                    {'$set': {'name': name,
+                              'avater_sub_url': avater_sub_url,
                               'phone': phone,
                               'sid': sid,
                               'gender': gender,

@@ -72,6 +72,12 @@ def login_action(request):
 
 def update_user_profile_action(request):
     user_id = ObjectId(request.POST['user_id'])
+    cur_user_info = db.get_user_info_by_id(user_id)
+    if 'name' in request.POST and request.POST['name'] != '':
+        name = request.POST['name']
+    else:
+        name = cur_user_info['name']
+    
     phone = ''
     if 'phone' in request.POST:
         phone = request.POST['phone']
@@ -95,11 +101,13 @@ def update_user_profile_action(request):
                                    r'user_avatar',
                                    avater_sub_url)
         image.save(avater_path,"jpeg")
-        
+    elif cur_user_info['avater_sub_url'] is not None:
+        avater_sub_url = cur_user_info['avater_sub_url']
     else:
         avater_sub_url = r'0.jpeg'
     
-    db.update_user_profile(user_id, avater_sub_url, phone, sid, gender, signature)
+    db.update_user_profile(user_id, name, avater_sub_url, phone, sid, 
+                           gender, signature)
     res = {}
     res['code'] = 0
     res['msg'] = r'update success'
