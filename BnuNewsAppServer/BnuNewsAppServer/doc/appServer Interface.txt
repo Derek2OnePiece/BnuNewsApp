@@ -56,3 +56,13 @@ password
 }
 
 
+3. 增加新闻
+
+appserver/news/add_news
+
+请求方式：
+POST
+
+必选参数：
+
+

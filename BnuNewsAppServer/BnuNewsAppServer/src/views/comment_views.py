@@ -3,7 +3,7 @@
 # 
 # Created: 2014-01-17
 #
-# All user operations
+# All comment operations
 #
 __author__ = 'Derek (Jing Luo), luojing.derek@gmail.com'
 __pychecker__ = 'no-callinit no-classattr'
@@ -19,6 +19,7 @@ db = dbtools.DB()
 
 
 def register_action(request):
+    print request.POST
     email = request.POST['username']
     password = request.POST['password']
     name = request.POST['name']

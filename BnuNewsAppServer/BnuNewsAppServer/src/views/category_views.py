@@ -3,7 +3,7 @@
 # 
 # Created: 2014-01-17
 #
-# All user operations
+# All news operations
 #
 __author__ = 'Derek (Jing Luo), luojing.derek@gmail.com'
 __pychecker__ = 'no-callinit no-classattr'

@@ -11,7 +11,6 @@ ADMINS = (
 MANAGERS = ADMINS
 
 PROJECT_ROOT = os.path.dirname(__file__)
-print(PROJECT_ROOT)
 
 DATABASES = {
     'default': {
@@ -161,3 +160,7 @@ LOGGING = {
         },
     }
 }
+
+STATIC_PATH = os.path.join(PROJECT_ROOT, r'static/')
+
+IMAGES_URL_PREFIX = r'appserver/p/images'

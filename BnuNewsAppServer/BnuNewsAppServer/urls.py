@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from BnuNewsAppServer import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -16,6 +17,9 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     (r'^appserver/user/', include('BnuNewsAppServer.src.urls.user_urls')),
-    # (r'^appserver/category/', include('BNUNewsAppServer.src.urls.category_urls')),
+    (r'^appserver/news/', include('BnuNewsAppServer.src.urls.news_urls')),
+    (r'^appserver/category/', include('BnuNewsAppServer.src.urls.category_urls')),
+    (r'^appserver/comment/', include('BnuNewsAppServer.src.urls.comment_urls')),
+    (r'^appserver/p/images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH + '/images'}),
 
 )
