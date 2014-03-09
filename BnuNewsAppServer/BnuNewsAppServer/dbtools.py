@@ -61,34 +61,50 @@ class DB:
     #    user_type
     #    is_admin               || 默认0
     #    avater_sub_url         ||
+    #    phone
+    #    sid
+    #    gender                 || 0: male
+    #    signature
+    #
     #
     #==========================================================================
-    def add_user(self, email, password, name, usertype, is_admin = 0):
+    def add_user(self, email, password, name, user_type, is_admin = 0):
         user = {'email':email,
                 'password':password,
                 'name': name,
-                'usertype': usertype, 
+                'user_type': user_type, 
                 'is_admin': is_admin, 
-                'avater_sub_url': None, }
+                'avater_sub_url': None, 
+                'phone': '',
+                'sid': '',
+                'gender': 0,
+                'signature': '', }
         return self.get_collection('user').insert(user, safe=True)
 
     def check_user_exist_by_email(self, email):
         return self.get_collection('user')\
-                 .find_one({'email': email, }) is not None
+                 .find_one({'email': email}) is not None
 
     def login(self, email, password):
-        user = self.get_collection('user').find_one({'email': email, 
+        return self.get_collection('user').find_one({'email': email, 
                                                      'password': password})
-        if user is not None:
-            return user['_id']
-        else:
-            return None
+
     
     def login_admin(self, email, password):
         pass
     
     def get_user_info_by_id(self, user_id):
         return self.get_collection('user').find_one({'_id': user_id})
+    
+    def update_user_profile(self, user_id, avater_sub_url = r'0.jpeg', 
+                            phone = '', sid = '', gender = 0, signature = ''):
+        return self.get_collection('user')\
+            .update({'_id': user_id},
+                    {'$set': {'avater_sub_url': avater_sub_url,
+                              'phone': phone,
+                              'sid': sid,
+                              'gender': gender,
+                              'signature': signature}})
     
     #==========================================================================
     # news operations

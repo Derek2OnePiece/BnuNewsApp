@@ -59,7 +59,7 @@ def get_comments_action(request):
         
         if user_info['avater_sub_url'] is not None:
             avater_url = os.path.join(settings.IMAGES_URL_PREFIX, 
-                                      r'user_avater',
+                                      r'user_avatar',
                                       user_info['avater_sub_url'])
         else:
             avater_url = ''

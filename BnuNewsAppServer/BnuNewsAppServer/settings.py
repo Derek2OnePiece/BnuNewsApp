@@ -161,6 +161,7 @@ LOGGING = {
     }
 }
 
-STATIC_PATH = os.path.join(PROJECT_ROOT, r'static/')
+STATIC_PATH = os.path.join(PROJECT_ROOT, r'static')
+IMAGES_PATH = os.path.join(STATIC_PATH, r'images')
 
 IMAGES_URL_PREFIX = r'appserver/p/images'
