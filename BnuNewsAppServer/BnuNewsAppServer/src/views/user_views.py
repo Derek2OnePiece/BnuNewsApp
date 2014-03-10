@@ -75,6 +75,7 @@ def login_action(request):
             res['avater_url'] = avater_url
         else:
             res['avater_url'] = ''
+
         
     else:
         res['code'] = 1

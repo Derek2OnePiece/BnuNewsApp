@@ -132,8 +132,8 @@ class DB:
     #==========================================================================
     def add_news(self, news_type, title, abstract, body, author,
                  module, pub_status = 0, is_delete = 0,
-                 inner_pic_sub_url = None,
-                 video_target_url = None):
+                 inner_pic_sub_url = r'',
+                 video_target_url = r''):
         # timestamp = datetime.now()   
         timestamp = long(time.time())
         raw_news = {'news_type': news_type,

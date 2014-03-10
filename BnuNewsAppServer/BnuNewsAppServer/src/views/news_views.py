@@ -70,6 +70,10 @@ def list_news_action(request):
         inner_pic_url = os.path.join(settings.IMAGES_URL_PREFIX, 
                                      r'news',
                                      raw_news['inner_pic_sub_url'])
+        if raw_news['video_target_url'] is None:
+            video_target_url = r''
+        else:
+            video_target_url = raw_news['video_target_url']
         news_list.append({'news_id': str(raw_news['_id']),
                           'news_type': raw_news['news_type'],
                           'title': raw_news['title'],
@@ -77,7 +81,7 @@ def list_news_action(request):
                           'module': raw_news['module'],
                           'pub_timestamp': raw_news['pub_timestamp'],
                           'inner_pic_sub_url': inner_pic_url,
-                          'video_target_url': raw_news['video_target_url'], })
+                          'video_target_url': video_target_url, })
     
     res = {}
     res['code'] = 0
