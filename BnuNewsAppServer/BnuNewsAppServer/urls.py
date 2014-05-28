@@ -18,7 +18,6 @@ urlpatterns = patterns('',
 
     (r'^appserver/user/', include('BnuNewsAppServer.src.urls.user_urls')),
     (r'^appserver/news/', include('BnuNewsAppServer.src.urls.news_urls')),
-    (r'^appserver/category/', include('BnuNewsAppServer.src.urls.category_urls')),
     (r'^appserver/comment/', include('BnuNewsAppServer.src.urls.comment_urls')),
     (r'^appserver/p/images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH + '/images'}),
 
