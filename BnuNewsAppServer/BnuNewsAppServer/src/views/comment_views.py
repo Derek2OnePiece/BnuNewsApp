@@ -48,7 +48,6 @@ def get_comments_action(request):
     raw_comment_list = \
         db.get_k_comments_by_timestamp_news_id(begin_timestamp, news_id, k)
     
-    count = raw_comment_list.count()
     comment_list = []
     for raw_comment in raw_comment_list:
         user_id = raw_comment['user_id']
@@ -57,24 +56,24 @@ def get_comments_action(request):
             res = {'code': 1, 'msg': r'评论加载失败', }
             return HttpResponse(json.dumps(res), )
         
-        if 'avater_sub_url' in user_info and \
-          user_info['avater_sub_url'] is not None and \
-          user_info['avater_sub_url'] != '':
-            avater_url = os.path.join(settings.IMAGES_URL_PREFIX, 
+        if 'avatar_sub_url' in user_info and \
+          user_info['avatar_sub_url'] is not None and \
+          user_info['avatar_sub_url'] != '':
+            avatar_url = os.path.join(settings.IMAGES_URL_PREFIX, 
                                       r'user_avatar',
-                                      user_info['avater_sub_url'])
+                                      user_info['avatar_sub_url'])
         else:
-            avater_url = ''
+            avatar_url = r''
         
         comment_list.append({'user_id': str(user_id),
-                             'user_name': user_info['name'],
+                             'name': user_info['name'],
                              'news_id': str(raw_comment['news_id']),
                              'pub_timestamp': raw_comment['pub_timestamp'],
-                             'avater_url': avater_url,
-                             'msg': raw_comment['msg'], })
+                             'avatar_url': avatar_url,
+                             'comment_msg': raw_comment['msg'], })
     
     res = {'code': 0,
-           'count': count,
+           'count': raw_comment_list.count(),
            'comment_list': comment_list, }    
         
     return HttpResponse(json.dumps(res), )

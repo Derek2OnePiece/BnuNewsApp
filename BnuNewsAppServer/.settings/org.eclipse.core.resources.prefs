@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
 encoding//BnuNewsAppServer/dbtools.py=utf-8
 encoding//BnuNewsAppServer/dbtools_test.py=utf-8
+encoding//BnuNewsAppServer/settings.py=utf-8
 encoding//BnuNewsAppServer/src/views/comment_views.py=utf-8
 encoding//BnuNewsAppServer/src/views/news_views.py=utf-8
+encoding//BnuNewsAppServer/src/views/revision_views.py=utf-8
 encoding//BnuNewsAppServer/src/views/user_views.py=utf-8
 encoding//BnuNewsAppServer/upload_test_data.py=utf-8

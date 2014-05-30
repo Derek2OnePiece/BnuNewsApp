@@ -55,26 +55,29 @@ class DB:
     # user operations
     #
     #    _id
-    #    email
-    #    password
-    #    name
-    #    user_type
-    #    is_admin               || 默认0
-    #    avater_sub_url         ||
-    #    phone
-    #    sid
-    #    gender                 || 0: male
-    #    signature
-    #
+    #    email           || int       ||
+    #    password        || int       ||
+    #    name            || string    || 昵称
+    #    user_type       || string    || 0-学生；1-校友；2-教师
+    #    is_admin        || int       || 默认0；0-普通用户；1-管理员
+    #    avater_sub_url  || string    || 头像文件相对路径
+    #    phone           || string    ||
+    #    sid             || string    || 学号 or 教师号
+    #    gender          || int       || 默认0；0-male；1-female
+    #    signature       || string    || 个性签名
     #
     #==========================================================================
+    
+    # TODO
+    # store password encoded
+    
     def add_user(self, email, password, name, user_type, is_admin = 0):
         user = {'email':email,
                 'password':password,
                 'name': name,
                 'user_type': user_type, 
                 'is_admin': is_admin, 
-                'avater_sub_url': '', 
+                'avatar_sub_url': '', 
                 'phone': '',
                 'sid': '',
                 'gender': 0,
@@ -96,12 +99,12 @@ class DB:
     def get_user_info_by_id(self, user_id):
         return self.get_collection('user').find_one({'_id': user_id})
     
-    def update_user_profile(self, user_id, name = None, avater_sub_url = r'0.jpeg', 
+    def update_user_profile(self, user_id, name = None, avatar_sub_url = r'0.jpeg', 
                             phone = '', sid = '', gender = 0, signature = ''):
         return self.get_collection('user')\
             .update({'_id': user_id},
                     {'$set': {'name': name,
-                              'avater_sub_url': avater_sub_url,
+                              'avatar_sub_url': avatar_sub_url,
                               'phone': phone,
                               'sid': sid,
                               'gender': gender,
@@ -111,30 +114,25 @@ class DB:
     # news operations
     #
     #    _id
-    #    news_type                ||   0：article 1：video
-    #    title
-    #    abstract                 ||   摘要 less than 20 words
-    #    body
-    #    author
-    #    module                   ||   模块
-    #    created_timestamp        ||
-    #    last_modify_timestamp    ||
-    #    pub_timestamp
-    #    pub_status               ||   0：发布； 1：未发布
-    #    inner_pic_sub_url
-    #    is_delete                ||   0: 不删除； 1：删除
-    #    video_target_url         ||
-    #    comments
-    #        user_id              ||
-    #        msg                  ||
-    #        submit_timestamp     ||
+    #    news_type                || int       || 0-article；1-video
+    #    title                    || string    ||
+    #    abstract                 || string    || 摘要 less than 20 words
+    #    body                     || string    || 
+    #    author                   || string    || 用于显示的作者
+    #    module                   || int       || 版块id >0
+    #    created_timestamp        || long      || 
+    #    last_modify_timestamp    || long      ||
+    #    pub_timestamp            || long      ||
+    #    pub_status               || int       || 默认0；0-未发布； 1-发布
+    #    inner_pic_sub_url        || string    || 文章配图的链接地址
+    #    is_delete                || int       || 默认0；0-不删除； 1-删除
+    #    video_target_url         || string    ||
     #
     #==========================================================================
     def add_news(self, news_type, title, abstract, body, author,
                  module, pub_status = 0, is_delete = 0,
                  inner_pic_sub_url = r'',
-                 video_target_url = r''):
-        # timestamp = datetime.now()   
+                 video_target_url = r''):   
         timestamp = long(time.time())
         raw_news = {'news_type': news_type,
                     'title': title,
@@ -148,8 +146,7 @@ class DB:
                     'pub_status': pub_status,
                     'is_delete': is_delete,
                     'inner_pic_sub_url': inner_pic_sub_url,
-                    'video_target_url': video_target_url, 
-                    'comments': [], }
+                    'video_target_url': video_target_url, }
         return self.get_collection('news').insert(raw_news)
     
     def update_pub_timestamp(self,):
@@ -161,19 +158,34 @@ class DB:
     def update_is_delete_status(self,):
         pass
     
-    def update_inner_pic_sub_url(self,):
-        pass
-    
     def get_k_news_by_timestamp_pub_status_module(self, cur_timestamp,
                                                         module, 
                                                         pub_status = 1,
                                                         k = 5):
         return self.get_collection('news')\
                  .find({'pub_status': 1,
+                        'module': module,
                         'pub_timestamp': {'$lte': cur_timestamp}})\
                  .sort('pub_timestamp', pymongo.DESCENDING)\
                  .limit(k)
     
+    def get_k_news_by_timestamp_pub_status(self, cur_timestamp,
+                                           pub_status = 1,
+                                           k = 1):
+        return self.get_collection('news')\
+                 .find({'pub_status': 1,
+                        'pub_timestamp': {'$lte': cur_timestamp}})\
+                 .sort('pub_timestamp', pymongo.DESCENDING)\
+                 .limit(k)
+                 
+    def get_news_count_by_timestamp_module(self, timestamp, module):
+        return self.get_collection('news')\
+                 .find({'pub_status': 1,
+                        'module': module,
+                        'pub_timestamp': {'$gte': timestamp}})\
+                 .sort('pub_timestamp', pymongo.DESCENDING)\
+                 .count()
+                 
     def get_news_detail_by_id(self, news_id):
         return self.get_collection('news').find_one({'_id': news_id})
     
@@ -197,11 +209,11 @@ class DB:
     #==========================================================================
     # comment operations
     #
-    #    _id                      ||
-    #    user_id                  ||
-    #    news_id                  ||
-    #    pub_timestamp            ||
-    #    msg                      ||
+    #    _id                
+    #    user_id            || ObjectId      || 发布者id
+    #    news_id            || ObjectId      || 关联的新闻id
+    #    pub_timestamp      || long          || 发布时间
+    #    msg                || string        ||
     #
     #==========================================================================
     def add_comment(self, news_id, user_id, msg):
@@ -216,6 +228,11 @@ class DB:
             .find({'news_id': news_id,
                    'pub_timestamp': {'$lte': begin_timestamp}})\
             .sort('pub_timestamp', pymongo.DESCENDING).limit(k)
+    
+    def get_comment_count_by_news_id(self, news_id):
+        return self.get_collection('comments')\
+                 .find({'news_id': news_id})\
+                 .count()
 
         
         

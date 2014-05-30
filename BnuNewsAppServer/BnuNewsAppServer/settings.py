@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # Django settings for BnuNewsAppServer project.
 import os
 
@@ -163,5 +165,18 @@ LOGGING = {
 
 STATIC_PATH = os.path.join(PROJECT_ROOT, r'static')
 IMAGES_PATH = os.path.join(STATIC_PATH, r'images')
+REPOS_PATH = os.path.join(STATIC_PATH, r'repos')
+
 
 IMAGES_URL_PREFIX = r'appserver/p/images'
+REPO_URL_PREFIX = r'appserver/repos'
+
+
+REVISION_NO = 1
+REVISION_FILE = r'v0.1.0.apk'
+REVISION_MSG = r'初始化版本'
+
+
+
+
+
