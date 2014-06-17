@@ -73,6 +73,7 @@ def get_comments_action(request):
                              'comment_msg': raw_comment['msg'], })
     
     res = {'code': 0,
+           'msg': r'评论加载成功',
            'count': raw_comment_list.count(),
            'comment_list': comment_list, }    
         
