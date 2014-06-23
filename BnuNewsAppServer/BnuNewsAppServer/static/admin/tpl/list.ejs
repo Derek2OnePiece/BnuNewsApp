@@ -1,0 +1,43 @@
+<ul class="list-group">
+    <% for ( var i= 0, len=data.list.length; i<len; i++ ) { %>
+    <li href="#" class="list-group-item">
+        <span class="no"><%= sn+i+1 %></span>
+        <span class="title"><%= data.list[i].title %></span>
+        <span>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    时间
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">创建时间：<%= new Date(data.list[i].created_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
+                    <li><a href="javascript:void(0)">修改时间：<%= new Date(data.list[i].last_modify_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
+                    <li><a href="javascript:void(0)">发布时间：<%= new Date(data.list[i].pub_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
+                </ul>
+            </div>
+        </span>
+
+        <span><button type="button" class="btn btn-primary">编辑</button></span>
+        <span><button type="button" class="btn btn-default btn-toggle">发布</button></span>
+        <span><button type="button" class="btn btn-danger">删除</button></span>
+    </li>
+    <% } %>
+
+</ul>
+
+<% if (pn >0) {%>
+<ul class="pagination pagination-lg">
+
+    <li class="<% if (1==pg) { %>disabled<% } %>">
+        <a href="<% if (1==pg) { %>javascript:void(0)<% } else { %>#<%= pg-1%><% } %>">&laquo;</a>
+    </li>
+
+    <% for (var j=1; j<=pn; j++) {%>
+    <li class="<% if (j==pg) { %>active<% } %>"><a href="#<%= j%>"><%= j%></a></li>
+    <% } %>
+
+    <li class="<% if (pn==pg) { %>disabled<% } %>">
+        <a href="<% if (1==pg) { %>javascript:void(0)<% } else { %>#<%= pg+1%><% } %>">&raquo;</a>
+    </li>
+</ul>
+<% } %>

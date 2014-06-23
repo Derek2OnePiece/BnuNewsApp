@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表-北京师范大学新闻app后台系统</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/detail.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+
+    <form role="form" class="edit">
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">标题</span>
+            <input type="text" class="form-control">
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">摘要</span>
+            <input type="text" class="form-control">
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">新闻类型</span>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="input-group input-group-lg input-textarea">
+            <span class="input-group-addon">正文</span>
+            <textarea class="form-control input-textarea"></textarea>
+        </div>
+
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">标题</span>
+            <input type="file" class="form-control">
+        </div>
+
+        <div class="input-group input-group-lg">
+
+            <button type="button" class="btn btn-lg btn-primary">提交</button>
+        </div>
+    </form>
+
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
