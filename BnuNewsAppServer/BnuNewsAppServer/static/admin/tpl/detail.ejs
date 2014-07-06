@@ -1,0 +1,76 @@
+<form role="form" class="edit">
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">标题</span>
+        <input id="news_title" type="text" class="form-control" value="<%= data.title%>">
+    </div>
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">摘要</span>
+        <input id="news_abstract" type="text" class="form-control" value="<%= data.abstract%>">
+    </div>
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">作者</span>
+        <input id="news_author" type="text" class="form-control" value="<%= data.author%>">
+    </div>
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">版块</span>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-lg dropdown-toggle"<%if (edit){%> data-toggle="dropdown"<%}%>>
+                <span data-moduleid="<%=data.module%>" id="news_module"><%= moduleList[data.module]%></span>
+                <%if (edit){%><span class="caret"></span><%}%>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <% for (var i in moduleList) {%>
+                <li><a data-moduleid="<%=i%>" class="news_module" href="javascript:void(0)"><%= moduleList[i]%></a></li>
+                <% }%>
+            </ul>
+        </div>
+    </div>
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">新闻类型</span>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-lg dropdown-toggle"<%if (edit){%> data-toggle="dropdown"<%}%>>
+                <span data-newstypeid="<%=data.news_type%>" id="news_type"><%= newsTypeList[data.news_type]%></span>
+                <%if (edit){%><span class="caret"></span><%}%>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <% for (var i in newsTypeList) {%>
+                <li><a data-newstypeid="<%=i%>" class="news_type" href="javascript:void(0)"><%= newsTypeList[i]%></a></li>
+                <% }%>
+            </ul>
+        </div>
+    </div>
+    <div class="input-group input-group-lg input-textarea">
+        <span class="input-group-addon">正文</span>
+        <textarea id="news_body" class="form-control input-textarea"><%= data.body%></textarea>
+    </div>
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">图片</span>
+        <%if(edit){%>
+            <input id="news_file" type="file" class="form-control">
+        <%} else {%>
+            <img src="<%= data.inner_pic_url%>" class="img-thumbnail"/>
+        <%}%>
+    </div>
+
+    <% if (edit) {%>
+    <div style="display:none" class="input-group input-group-lg">
+        <span class="input-group-addon">视频</span>
+        <input id="news_video" type="text" class="form-control" value="请输入视频播放地址">
+    </div>
+    <% } %>
+
+    <% if (data.news_type == '1') {%>
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">视频</span>
+        <input id="news_video" type="text" class="form-control" value="<%= data.video_target_url%>">
+    </div>
+    <% } %>
+
+    <div class="input-group input-group-lg">
+        <%if(edit){%><button id="news_submit" type="button" class="btn btn-lg btn-primary">提交</button><%}%>
+    </div>
+</form>

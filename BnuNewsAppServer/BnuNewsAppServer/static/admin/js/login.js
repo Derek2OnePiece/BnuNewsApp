@@ -1,6 +1,6 @@
 $(function(){
     if ($.cookie('name')) {
-        location.href='list.html';
+        location.href='index.html';
     }
 
     $('#form-submit').click(function(event){
@@ -23,7 +23,7 @@ $(function(){
                                 } else {
                                     $.cookie('name', name, { expires: 365 });
                                 }
-                                location.href='list.html';
+                                location.href='index.html';
                             } else {
                                 alert('用户名或密码错误');
                             }

@@ -1,3 +1,5 @@
+<a target="_blank" href="detail.html#" type="button" class="btn btn-lg btn-primary">+ 新建</a>
+
 <ul class="list-group">
     <% for ( var i= 0, len=data.list.length; i<len; i++ ) { %>
     <li href="#" class="list-group-item">
@@ -17,9 +19,19 @@
             </div>
         </span>
 
-        <span><button type="button" class="btn btn-primary">编辑</button></span>
-        <span><button type="button" class="btn btn-default btn-toggle">发布</button></span>
-        <span><button type="button" class="btn btn-danger">删除</button></span>
+        <span><a target="_blank" href="detail.html#<%= data.list[i].news_id %>" class="btn btn-primary" role="button">详情</a></span>
+        <span><button type="button"
+                      data-newsid="<%= data.list[i].news_id%>"
+                      class="btn btn-publish btn-default btn-toggle<% if(data.list[i].pub_status) {%> active<%}%>">
+                <% if(data.list[i].pub_status) {%>
+                已发布
+                <%}else{%>
+                发布
+                <%}%>
+            </button></span>
+        <span><button type="button"
+                      data-newsid="<%= data.list[i].news_id%>"
+                      class="btn btn-delete btn-danger">删除</button></span>
     </li>
     <% } %>
 
