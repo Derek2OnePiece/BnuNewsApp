@@ -167,6 +167,7 @@ STATIC_PATH = os.path.join(PROJECT_ROOT, r'static')
 IMAGES_PATH = os.path.join(STATIC_PATH, r'images')
 REPOS_PATH = os.path.join(STATIC_PATH, r'repos')
 ADMIN_PATH = os.path.join(STATIC_PATH, r'admin')
+FILE_PATH = os.path.join(STATIC_PATH, r'file')
 
 
 IMAGES_URL_PREFIX = r'appserver/p/images'

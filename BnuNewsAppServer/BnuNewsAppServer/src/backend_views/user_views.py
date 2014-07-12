@@ -34,3 +34,11 @@ def login_action(request):
         
     return HttpResponse(json.dumps(res), )
 
+def get_user_summary_action(request):
+    res = {}
+    res['code'] = 0
+    res['msg'] = r'获取用户统计数据成功'
+    res['reg_user_count'] = 145
+    res['reg_user_summary_file_url'] = r'appserver/admin/file/dd.md' 
+    
+    return HttpResponse(json.dumps(res), )
