@@ -13,10 +13,10 @@ class UploadTestData():
 
     def upload(self):
         # self.upload_user()
-        # self.upload_admin()
-        self.upload_news_1()
-        self.upload_news_2()
-        self.upload_news_3()
+        self.upload_admin()
+        # self.upload_news_1()
+        # self.upload_news_2()
+        # self.upload_news_3()
 
     #==========================================================================
     # user operations
