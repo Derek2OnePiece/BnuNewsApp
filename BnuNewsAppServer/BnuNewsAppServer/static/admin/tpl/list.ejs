@@ -1,9 +1,69 @@
-<a target="_blank" href="detail.html#" type="button" class="btn btn-lg btn-primary">+ 新建</a>
+<!--a target="_blank" href="detail.html#" type="button" class="btn btn-lg btn-primary">+ 新建</a-->
 
-<ul class="list-group">
-    <% for ( var i= 0, len=data.list.length; i<len; i++ ) { %>
+<table class="table table-bordered list-table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>标题</th>
+        <th class="r-align">添加时间</th>
+        <th class="r-align">修改时间</th>
+        <th class="r-align">发布时间</th>
+        <th class="r-align">详情</th>
+        <th class="r-align">发布</th>
+        <th class="r-align">删除</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for ( var i = 0, len = data.list.length; i < len; i++ ) { %>
+    <tr>
+        <td><span class="no"><%= sn + i + 1 %></span></td>
+        <td><%= data.list[i].title %></td>
+        <td class="r-align">
+            <%if(data.list[i].created_timestamp){%>
+            <%= new Date(data.list[i].created_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %>
+            <%}%>
+        </td>
+        <td class="r-align">
+            <%if(data.list[i].last_modify_timestamp){%>
+            <%= new Date(data.list[i].last_modify_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %>
+            <%}%>
+        </td>
+        <td class="r-align">
+            <%if(data.list[i].pub_timestamp){%>
+            <%= new Date(data.list[i].pub_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %>
+            <%}%>
+        </td>
+        <td class="r-align">
+            <a target="_blank" href="detail.html#<%= data.list[i].news_id %>" class="btn btn-primary"
+               role="button">详情</a>
+        </td>
+        <td class="r-align">
+            <button type="button"
+                    data-newsid="<%= data.list[i].news_id %>"
+                    class="btn btn-publish btn-default btn-toggle<% if(data.list[i].pub_status) { %> active<% } %>">
+                <% if(data.list[i].pub_status) { %>
+                已发布
+                <% }else{ %>
+                发布
+                <% } %>
+            </button>
+        </td>
+        <td class="r-align">
+            <button type="button"
+                    data-newsid="<%= data.list[i].news_id %>"
+                    class="btn btn-delete btn-danger">删除
+            </button>
+        </td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+
+
+<!-- ul class="list-group">
+    <% for ( var i = 0, len = data.list.length; i < len; i++ ) { %>
     <li href="#" class="list-group-item">
-        <span class="no"><%= sn+i+1 %></span>
+        <span class="no"><%= sn + i + 1 %></span>
         <span class="title"><%= data.list[i].title %></span>
         <span>
             <div class="btn-group">
@@ -12,44 +72,51 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">创建时间：<%= new Date(data.list[i].created_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
-                    <li><a href="javascript:void(0)">修改时间：<%= new Date(data.list[i].last_modify_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
-                    <li><a href="javascript:void(0)">发布时间：<%= new Date(data.list[i].pub_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a></li>
+                    <li>
+                        <a href="javascript:void(0)">创建时间：<%= new Date(data.list[i].created_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">修改时间：<%= new Date(data.list[i].last_modify_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">发布时间：<%= new Date(data.list[i].pub_timestamp * 1000).Format("yyyy-MM-dd hh:mm:ss") %></a>
+                    </li>
                 </ul>
             </div>
         </span>
 
-        <span><a target="_blank" href="detail.html#<%= data.list[i].news_id %>" class="btn btn-primary" role="button">详情</a></span>
+        <span><a target="_blank" href="detail.html#<%= data.list[i].news_id %>" class="btn btn-primary"
+                 role="button">详情</a></span>
         <span><button type="button"
-                      data-newsid="<%= data.list[i].news_id%>"
-                      class="btn btn-publish btn-default btn-toggle<% if(data.list[i].pub_status) {%> active<%}%>">
-                <% if(data.list[i].pub_status) {%>
+                      data-newsid="<%= data.list[i].news_id %>"
+                      class="btn btn-publish btn-default btn-toggle<% if(data.list[i].pub_status) { %> active<% } %>">
+                <% if(data.list[i].pub_status) { %>
                 已发布
-                <%}else{%>
+                <% }else{ %>
                 发布
-                <%}%>
+                <% } %>
             </button></span>
         <span><button type="button"
-                      data-newsid="<%= data.list[i].news_id%>"
-                      class="btn btn-delete btn-danger">删除</button></span>
+                      data-newsid="<%= data.list[i].news_id %>"
+                      class="btn btn-delete btn-danger">删除
+            </button></span>
     </li>
     <% } %>
+</ul -->
 
-</ul>
-
-<% if (pn >0) {%>
+<% if (pn > 0) { %>
 <ul class="pagination pagination-lg">
 
-    <li class="<% if (1==pg) { %>disabled<% } %>">
-        <a href="<% if (1==pg) { %>javascript:void(0)<% } else { %>#<%= pg-1%><% } %>">&laquo;</a>
+    <li class="<% if (1 == pg) { %>disabled<% } %>">
+        <a href="<% if (1 == pg) { %>javascript:void(0)<% } else { %>#<%= pg - 1 %> <% } %>">&laquo;</a>
     </li>
 
-    <% for (var j=1; j<=pn; j++) {%>
-    <li class="<% if (j==pg) { %>active<% } %>"><a href="#<%= j%>"><%= j%></a></li>
+    <% for (var j = 1; j <= pn; j++) { %>
+    <li class="<% if (j == pg) { %>active<% } %>"><a href="#<%= j %>"><%= j %></a></li>
     <% } %>
 
-    <li class="<% if (pn==pg) { %>disabled<% } %>">
-        <a href="<% if (1==pg) { %>javascript:void(0)<% } else { %>#<%= pg+1%><% } %>">&raquo;</a>
+    <li class="<% if (pn == pg) { %>disabled<% } %>">
+        <a href="<% if (pn == pg) { %>javascript:void(0)<% } else { %>#<%= pg + 1 %> <% } %>">&raquo;</a>
     </li>
 </ul>
 <% } %>

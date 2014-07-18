@@ -8,4 +8,6 @@ encoding//BnuNewsAppServer/src/views/comment_views.py=utf-8
 encoding//BnuNewsAppServer/src/views/news_views.py=utf-8
 encoding//BnuNewsAppServer/src/views/revision_views.py=utf-8
 encoding//BnuNewsAppServer/src/views/user_views.py=utf-8
+encoding//BnuNewsAppServer/static/admin=UTF-8
+encoding//BnuNewsAppServer/static/admin/js/login.js=UTF-8
 encoding//BnuNewsAppServer/upload_test_data.py=utf-8

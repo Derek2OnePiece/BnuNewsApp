@@ -1,0 +1,25 @@
+body {
+    background-color: #eee;
+}
+
+.btn-nav {
+    margin: 8px 5px;
+    width: 172px;
+}
+
+
+.list-group {
+    margin-top:20px;
+}
+
+.user-wrap {
+    height: 375px;
+    text-align: center;
+    background-color: #ffffff;
+    margin-top:20px;
+    padding: 100px 0;
+}
+h4 {
+    margin:20px 0;
+}
+

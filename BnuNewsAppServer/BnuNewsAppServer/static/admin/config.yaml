@@ -1,4 +1,2 @@
 name: stayreal
 version: 2
-handle:
-- rewrite: if(!is_dir() && !is_file() && path ~ "*") goto "http://115.28.130.170:8081$1?%{QUERY_STRING}"

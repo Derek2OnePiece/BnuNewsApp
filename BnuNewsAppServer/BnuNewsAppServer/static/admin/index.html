@@ -4,16 +4,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>列表-北京师范大学新闻app后台系统</title>
+    <title>新闻管理-北京师范大学新闻app后台系统</title>
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--link href="css/bootstrap-theme.css" rel="stylesheet"-->
     <link href="css/list.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="main" class="container">
 
+<div class="col-md-3">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h2>北京师范大学新闻APP后台导航</h2>
+        </li>
+        <li class="list-group-item">
+            <a href="detail.html#" type="button" class="btn btn-lg btn-default btn-nav">新闻发布</a>
+            <button type="button" class="btn btn-lg btn-default active btn-nav">新闻管理</button>
+        </li>
+        <li class="list-group-item">
+            <a href="user.html#" type="button" class="btn btn-lg btn-default btn-nav">用户管理</a>
+        </li>
+    </ul>
 </div>
+<div id="main" class="col-md-9"></div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
