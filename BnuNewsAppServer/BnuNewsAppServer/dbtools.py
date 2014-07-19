@@ -213,7 +213,7 @@ class DB:
                                            pub_status, k = 1):
         return self.get_collection('news')\
                  .find({'pub_status': 1,
-                        'pub_timestamp': {'$lte': cur_timestamp}})\
+                        'pub_timestamp': {'$gte': cur_timestamp}})\
                  .sort('pub_timestamp', pymongo.DESCENDING)\
                  .limit(k)
                  
